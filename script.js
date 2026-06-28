@@ -1,34 +1,33 @@
 const gift = document.getElementById("gift");
-const balloonContainer = document.getElementById("balloons");
+const container = document.getElementById("balloons");
 
-gift.addEventListener("click", () => {
+gift.addEventListener("click", ()=>{
 
-    gift.innerHTML = "🎊";
-    gift.style.transform = "scale(1.2) rotate(15deg)";
+gift.style.pointerEvents="none";
 
-    const emojis = ["🎈","🎈","🎈","🎈","🎈","🎈"];
+for(let i=0;i<35;i++){
 
-    for(let i=0;i<40;i++){
+let balloon=document.createElement("div");
 
-        let balloon = document.createElement("div");
-        balloon.className = "balloon";
-        balloon.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+balloon.className="balloon";
+balloon.innerHTML="🎈";
 
-        balloon.style.left = Math.random()*100 + "%";
-        balloon.style.animationDuration = (3 + Math.random()*3) + "s";
-        balloon.style.fontSize = (35 + Math.random()*35) + "px";
+balloon.style.left=Math.random()*100+"vw";
+balloon.style.animationDuration=(4+Math.random()*3)+"s";
+balloon.style.fontSize=(35+Math.random()*30)+"px";
 
-        balloonContainer.appendChild(balloon);
+container.appendChild(balloon);
 
-        // Balloon Pop Animation
-        setTimeout(()=>{
-            balloon.innerHTML="💥";
-            balloon.style.transform="scale(1.8)";
-        },2000+Math.random()*2000);
+setTimeout(()=>{
+balloon.style.transition="0.3s";
+balloon.style.transform="scale(1.8)";
+balloon.style.opacity="0";
+},2500+Math.random()*2500);
 
-        setTimeout(()=>{
-            balloon.remove();
-        },5000);
-    }
+setTimeout(()=>{
+balloon.remove();
+},6000);
+
+}
 
 });
