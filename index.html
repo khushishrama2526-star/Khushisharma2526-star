@@ -2,251 +2,385 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, My Love! ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday My Love</title>
     <style>
-        :root {
-            --primary-pink: #ff4d6d;
-            --secondary-pink: #ff758f;
-            --dark-bg: #1a0005;
-            --card-bg: #ffe5ec;
-        }
-
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, var(--dark-bg), #38000f);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #fff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             min-height: 100vh;
+            overflow-x: hidden;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Rainbow / Gradient Text Effect */
+        .rainbow-text {
+            background: linear-gradient(to right, #ff4d4d, #ff944d, #ffff4d, #4dff4d, #4da6ff, #b34dff, #ff4d4d);
+            background-size: 400% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbowFlow 8s linear infinite;
+            font-weight: 800;
+            text-align: center;
+        }
+        @keyframes rainbowFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Layout Views */
+        .page {
+            width: 100%;
+            max-width: 500px;
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
+            text-align: center;
+            z-index: 10;
+        }
+        .page.active {
+            display: flex;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Floating Hearts Background */
-        .heart-bg {
+        /* Index Typography */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+        .intro-p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin-bottom: 35px;
+            font-weight: 300;
+            padding: 0 10px;
+        }
+        .love-list {
+            width: 100%;
+            text-align: left;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 25px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+        }
+        .love-item {
+            margin-bottom: 18px;
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+        .love-item:last-child {
+            margin-bottom: 0;
+        }
+        .label {
+            font-weight: 700;
+            display: inline-block;
+            margin-right: 4px;
+        }
+        .desc {
+            color: #cccccc;
+            font-weight: 300;
+        }
+
+        /* Buttons */
+        .btn-white {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(255,255,255,0.15);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        .btn-white:active {
+            transform: scale(0.95);
+        }
+
+        /* Smooth Cherry Blossom Canvas Background */
+        .blossom-container {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
+            overflow: hidden;
         }
-
-        .heart {
+        .petal {
             position: absolute;
-            color: var(--secondary-pink);
-            opacity: 0.6;
-            animation: float Up 6s linear infinite;
+            background: linear-gradient(135deg, #ffb7c5, #ff9ebb);
+            border-radius: 150% 0 150% 150%/150% 0 150% 150%;
+            opacity: 0.75;
+            animation: fall linear infinite, sway ease-in-out infinite;
+        }
+        @keyframes fall {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+        @keyframes sway {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(80px) rotate(180deg); }
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(105vh) scale(0.5); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-        }
-
-        /* Main Container */
-        .container {
-            text-align: center;
-            z-index: 10;
-            padding: 20px;
-            max-width: 600px;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: #fff;
-            text-shadow: 0 0 10px var(--primary-pink), 0 0 20px var(--secondary-pink);
-            margin-bottom: 10px;
-            animation: pulse 2s infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.03); }
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--secondary-pink);
+        /* Page 2 - Surprise Style */
+        .surprise-title {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #ffffff;
             margin-bottom: 40px;
-            font-style: italic;
+            letter-spacing: 0.5px;
         }
-
-        /* The Interactive Birthday Card */
-        .card-container {
-            perspective: 1000px;
-            width: 300px;
-            height: 400px;
-            margin: 0 auto;
+        
+        /* Interactive Emoji Gift Box */
+        .gift-emoji-box {
+            font-size: 6.5rem;
             cursor: pointer;
+            user-select: none;
+            display: inline-block;
+            margin: 30px auto;
+            transition: transform 0.2s ease;
+            animation: gentleBounce 2s infinite ease-in-out;
         }
-
-        .card {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 1s ease;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            border-radius: 15px;
+        .gift-emoji-box:active {
+            transform: scale(0.9);
         }
-
-        .card.open {
-            transform: rotateY(-180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .card-front {
-            background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
-            color: white;
-        }
-
-        .card-front .gift-icon {
-            font-size: 5rem;
-            margin-bottom: 15px;
-            animation: bounce 1.5s infinite;
-        }
-
-        @keyframes bounce {
+        @keyframes gentleBounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .gift-emoji-box.opened {
+            animation: fadeOutCrack 0.5s forwards;
+            pointer-events: none;
+        }
+        @keyframes fadeOutCrack {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.4); opacity: 0; }
         }
 
-        .card-back {
-            background-color: var(--card-bg);
-            color: #333;
-            transform: rotateY(180deg);
-            overflow-y: auto;
-        }
-
-        .card-back h2 {
-            color: var(--primary-pink);
-            margin-top: 0;
-        }
-
-        .card-back p {
-            line-height: 1.6;
-            font-size: 1.05rem;
-        }
-
-        /* Music Button */
-        .music-btn {
-            background: transparent;
-            border: 2px solid var(--secondary-pink);
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 25px;
-            margin-top: 30px;
+        /* Red Balloon Explosion Overlay */
+        .balloon {
+            position: fixed;
+            width: 75px;
+            height: 90px;
+            background: radial-gradient(circle at 30% 30%, #ff4d4d, #cc0000);
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            z-index: 999;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
+            box-shadow: inset -5px -10px 20px rgba(0,0,0,0.3), 0 10px 20px rgba(0,0,0,0.2);
         }
-
-        .music-btn:hover {
-            background: var(--secondary-pink);
-            box-shadow: 0 0 15px var(--secondary-pink);
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 10px solid #cc0000;
+        }
+        .balloon-string {
+            position: absolute;
+            bottom: -45px;
+            left: 50%;
+            width: 2px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.4);
+        }
+        @keyframes riseUp {
+            0% { transform: translateY(105vh) scale(0.5); }
+            100% { transform: translateY(-120vh) scale(1.1); }
+        }
+        
+        /* Pop Effect */
+        .pop-effect {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff4d4d;
+            z-index: 1000;
+            pointer-events: none;
+            animation: explode 0.4s ease-out forwards;
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(6); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="heart-bg" id="heartBg"></div>
+    <!-- Soft and Smooth Falling Cherry Blossom Background -->
+    <div class="blossom-container" id="blossomBg"></div>
 
-    <div class="container">
-        <h1>Happy Birthday, My Love!</h1>
-        <p class="subtitle">Click the card below to open your gift...</p>
-
-        <!-- Birthday Card -->
-        <div class="card-container" onclick="toggleCard()">
-            <div class="card" id="birthdayCard">
-                <!-- Front of Card -->
-                <div class="card-front">
-                    <div class="gift-icon">🎁</div>
-                    <h3>Tap to Open</h3>
-                    <p style="font-size: 0.85rem; opacity: 0.8;">Made with all my love</p>
-                </div>
-                <!-- Inside/Back of Card -->
-                <div class="card-back">
-                    <h2>To My Favorite Person,</h2>
-                    <p>
-                        Happy Birthday! 🎂 <br><br>
-                        Today is all about celebrating the most beautiful, amazing, and incredible person in my life. Thank you for bringing so much happiness, laughter, and love into my world every single day. 
-                        <br><br>
-                        I hope your day is as bright and wonderful as your smile. I love you to the moon and back! ❤️
-                    </p>
-                </div>
+    <!-- PAGE 1: INDEX -->
+    <div class="page active" id="page1">
+        <h1 class="rainbow-text">Happy birthday my love.</h1>
+        <p class="intro-p">Today is not just your birthday it's a special day for me and you because on this day you were born and make my life better and make it happy. I really love you my love.</p>
+        
+        <div class="love-list">
+            <div class="love-item">
+                <span class="label rainbow-text">My love-</span>
+                <span class="desc">Because only you can handle me.</span>
+            </div>
+            <div class="love-item">
+                <span class="label rainbow-text">My Darling-</span>
+                <span class="desc">Because I saw my happiest future in you.</span>
+            </div>
+            <div class="love-item">
+                <span class="label rainbow-text">My King-</span>
+                <span class="desc">Because you are the only one who have permission for touch me, kiss me, hug me and love me.</span>
+            </div>
+            <div class="love-item">
+                <span class="label rainbow-text">My Favourite-</span>
+                <span class="desc">Because I like you.</span>
+            </div>
+            <div class="love-item">
+                <span class="label rainbow-text">Teddy, cutie, handsome, hottie, sexy, my boy-</span>
+                <span class="desc">Because I only love you.</span>
             </div>
         </div>
 
-        <!-- Optional Music Placeholder -->
-        <button class="music-btn" onclick="toggleMusic()">🎵 Play Romantic Beat</button>
-        <audio id="bgMusic" loop>
-            <!-- You can replace this URL with a link to any royalty-free romantic background track (.mp3) -->
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        </audio>
+        <button class="btn-white" onclick="navigateToPage2()">click here</button>
+    </div>
+
+    <!-- PAGE 2: SURPRISE -->
+    <div class="page" id="page2">
+        <h2 class="surprise-title">There is a little surprise for my life.</h2>
+        
+        <!-- Plain 🎁 Emoji Box -->
+        <div class="gift-emoji-box" id="giftEmoji" onclick="openGift()">🎁</div>
     </div>
 
     <script>
-        // Flip the card
-        function toggleCard() {
-            const card = document.getElementById('birthdayCard');
-            card.classList.toggle('open');
+        // Page Navigation
+        function navigateToPage2() {
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.add('active');
         }
 
-        // Play/Pause background music
-        function toggleMusic() {
-            const audio = document.getElementById('bgMusic');
-            const btn = document.querySelector('.music-btn');
-            if (audio.paused) {
-                audio.play().catch(e => console.log("Audio play blocked by browser. Click again!"));
-                btn.innerHTML = "⏸️ Pause Music";
-            } else {
-                audio.pause();
-                btn.innerHTML = "🎵 Play Romantic Beat";
-            }
-        }
+        // Smooth Cherry Blossom Generation
+        const blossomBg = document.getElementById('blossomBg');
+        const totalPetals = 30; // Control number of continuous petals
 
-        // Generate floating background hearts
-        function createHearts() {
-            const bg = document.getElementById('heartBg');
-            const heartTypes = ['❤️', '💖', '💝', '💕'];
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
             
-            for (let i = 0; i < 25; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.innerText = heartTypes[Math.floor(Math.random() * heartTypes.length)];
-                
-                // Randomize positions and delays
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-                heart.style.animationDelay = Math.random() * 5 + 's';
-                heart.style.animationDuration = Math.random() * 4 + 4 + 's';
-                
-                bg.appendChild(heart);
+            // Random sizes for depth feel
+            const size = Math.random() * 12 + 8; // Between 8px and 20px
+            petal.style.width = size + 'px';
+            petal.style.height = size + 'px';
+            
+            // Random positioning across width
+            petal.style.left = Math.random() * 100 + 'vw';
+            
+            // Random duration for smooth, unsynchronized flow
+            const fallDuration = Math.random() * 6 + 6; // 6s to 12s
+            const swayDuration = Math.random() * 4 + 3; // 3s to 7s
+            petal.style.animationName = 'fall, sway';
+            petal.style.animationDuration = `${fallDuration}s, ${swayDuration}s`;
+            
+            // Random delay to scatter initialization
+            petal.style.animationDelay = Math.random() * -10 + 's'; 
+
+            blossomBg.appendChild(petal);
+        }
+
+        // Initialize the falling leaves effect smoothly
+        for (let i = 0; i < totalPetals; i++) {
+            createPetal();
+        }
+
+        // Page 2: Gift Open & Balloon Pop Simulation
+        let giftOpened = false;
+        function openGift() {
+            if (giftOpened) return;
+            giftOpened = true;
+            
+            const gift = document.getElementById('giftEmoji');
+            gift.classList.add('opened');
+
+            // Trigger multiple waves of red balloons
+            for (let i = 0; i < 50; i++) {
+                setTimeout(createBalloon, i * 80);
             }
         }
 
-        // Initialize hearts on load
-        createHearts();
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            
+            balloon.style.left = Math.random() * 85 + 5 + 'vw';
+            balloon.style.top = '105vh';
+            
+            const sizeMultiplier = Math.random() * 0.4 + 0.8;
+            balloon.style.transform = `scale(${sizeMultiplier})`;
+            
+            const duration = Math.random() * 3 + 3;
+            balloon.style.animation = `riseUp ${duration}s ease-out forwards`;
+            
+            const string = document.createElement('div');
+            string.classList.add('balloon-string');
+            balloon.appendChild(string);
+
+            // Pop interactions
+            balloon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                popBalloon(balloon, e.clientX, e.clientY);
+            });
+            balloon.addEventListener('touchstart', (e) => {
+                e.stopPropagation();
+                const touch = e.touches[0];
+                popBalloon(balloon, touch.clientX, touch.clientY);
+            });
+
+            document.body.appendChild(balloon);
+
+            setTimeout(() => { if(balloon.parentNode) balloon.remove(); }, duration * 1000);
+        }
+
+        function popBalloon(balloon, x, y) {
+            const pop = document.createElement('div');
+            pop.classList.add('pop-effect');
+            pop.style.left = (x - 5) + 'px';
+            pop.style.top = (y - 5) + 'px';
+            document.body.appendChild(pop);
+            
+            balloon.remove();
+            
+            setTimeout(() => { pop.remove(); }, 400);
+        }
     </script>
 </body>
-  </html>
+    </html>
