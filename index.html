@@ -1,65 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love! ❤️</title>
+    <style>
+        :root {
+            --primary-pink: #ff4d6d;
+            --secondary-pink: #ff758f;
+            --dark-bg: #1a0005;
+            --card-bg: #ffe5ec;
+        }
 
-<link rel="stylesheet" href="style.css">
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--dark-bg), #38000f);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        /* Floating Hearts Background */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            color: var(--secondary-pink);
+            opacity: 0.6;
+            animation: float Up 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Main Container */
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary-pink), 0 0 20px var(--secondary-pink);
+            margin-bottom: 10px;
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-pink);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* The Interactive Birthday Card */
+        .card-container {
+            perspective: 1000px;
+            width: 300px;
+            height: 400px;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s ease;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border-radius: 15px;
+        }
+
+        .card.open {
+            transform: rotateY(-180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, var(--primary-pink), var(--secondary-pink));
+            color: white;
+        }
+
+        .card-front .gift-icon {
+            font-size: 5rem;
+            margin-bottom: 15px;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .card-back {
+            background-color: var(--card-bg);
+            color: #333;
+            transform: rotateY(180deg);
+            overflow-y: auto;
+        }
+
+        .card-back h2 {
+            color: var(--primary-pink);
+            margin-top: 0;
+        }
+
+        .card-back p {
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        /* Music Button */
+        .music-btn {
+            background: transparent;
+            border: 2px solid var(--secondary-pink);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .music-btn:hover {
+            background: var(--secondary-pink);
+            box-shadow: 0 0 15px var(--secondary-pink);
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="emoji">🎁</div>
-<div class="emoji">🎈</div>
-<div class="emoji">🎂</div>
-<div class="emoji">💖</div>
-<div class="emoji">🎈</div>
-<div class="emoji">💖</div>
+    <div class="heart-bg" id="heartBg"></div>
 
-<div class="container">
+    <div class="container">
+        <h1>Happy Birthday, My Love!</h1>
+        <p class="subtitle">Click the card below to open your gift...</p>
 
-<h1 class="white">
-🎂 Happy Birthday My Love 
-</h1>
+        <!-- Birthday Card -->
+        <div class="card-container" onclick="toggleCard()">
+            <div class="card" id="birthdayCard">
+                <!-- Front of Card -->
+                <div class="card-front">
+                    <div class="gift-icon">🎁</div>
+                    <h3>Tap to Open</h3>
+                    <p style="font-size: 0.85rem; opacity: 0.8;">Made with all my love</p>
+                </div>
+                <!-- Inside/Back of Card -->
+                <div class="card-back">
+                    <h2>To My Favorite Person,</h2>
+                    <p>
+                        Happy Birthday! 🎂 <br><br>
+                        Today is all about celebrating the most beautiful, amazing, and incredible person in my life. Thank you for bringing so much happiness, laughter, and love into my world every single day. 
+                        <br><br>
+                        I hope your day is as bright and wonderful as your smile. I love you to the moon and back! ❤️
+                    </p>
+                </div>
+            </div>
+        </div>
 
-<p class="white">
-Today is not just your birthday,
-it's a special day for me and you because
-on this day you were born and made my life better
-and happier.
-</p>
+        <!-- Optional Music Placeholder -->
+        <button class="music-btn" onclick="toggleMusic()">🎵 Play Romantic Beat</button>
+        <audio id="bgMusic" loop>
+            <!-- You can replace this URL with a link to any royalty-free romantic background track (.mp3) -->
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
-<h2 class="white">
-I Really Love You My Love ❤️
-</h2>
+    <script>
+        // Flip the card
+        function toggleCard() {
+            const card = document.getElementById('birthdayCard');
+            card.classList.toggle('open');
+        }
 
-<div class="message white">
+        // Play/Pause background music
+        function toggleMusic() {
+            const audio = document.getElementById('bgMusic');
+            const btn = document.querySelector('.music-btn');
+            if (audio.paused) {
+                audio.play().catch(e => console.log("Audio play blocked by browser. Click again!"));
+                btn.innerHTML = "⏸️ Pause Music";
+            } else {
+                audio.pause();
+                btn.innerHTML = "🎵 Play Romantic Beat";
+            }
+        }
 
-<p><b>My Love</b><br>
-Because only you can handle me.</p>
+        // Generate floating background hearts
+        function createHearts() {
+            const bg = document.getElementById('heartBg');
+            const heartTypes = ['❤️', '💖', '💝', '💕'];
+            
+            for (let i = 0; i < 25; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerText = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+                
+                // Randomize positions and delays
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.animationDuration = Math.random() * 4 + 4 + 's';
+                
+                bg.appendChild(heart);
+            }
+        }
 
-<p><b>My Darling</b><br>
-Because I saw my happiest future with you.</p>
-
-<p><b>My King</b><br>
-Because you always make me feel safe, loved and special.</p>
-
-<p><b>My Favourite</b><br>
-Because I like you.</p>
-
-<p><b>Teddy • Cutie • Handsome • Hottie • My Boy</b><br>
-Because I only love you. ❤️</p>
-
-</div>
-
-<a href="gift.html" class="btn">
-Click Here 🎁
-</a>
-
-</div>
-
-<script src="script.js"></script>
-
+        // Initialize hearts on load
+        createHearts();
+    </script>
 </body>
-</html>
+  </html>
