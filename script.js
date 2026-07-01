@@ -132,3 +132,25 @@ font-size:26px;
 }
 
 }
+const balloons = ["🎈","🎈","🎈","🎉","✨","❤️"];
+
+function createBalloon(){
+
+const balloon = document.createElement("div");
+balloon.className = "balloon";
+
+balloon.innerHTML = balloons[Math.floor(Math.random()*balloons.length)];
+
+balloon.style.left = Math.random()*100 + "vw";
+balloon.style.fontSize = (25 + Math.random()*25) + "px";
+balloon.style.animationDuration = (4 + Math.random()*3) + "s";
+
+document.body.appendChild(balloon);
+
+setTimeout(()=>{
+balloon.remove();
+},7000);
+
+}
+
+setInterval(createBalloon,200);
