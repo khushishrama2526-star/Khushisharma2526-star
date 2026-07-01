@@ -224,3 +224,25 @@ padding:14px;
 }
 
   }
+.balloon{
+position:fixed;
+bottom:-100px;
+font-size:35px;
+pointer-events:none;
+z-index:1;
+animation:fly linear forwards;
+}
+
+@keyframes fly{
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+10%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
+  }
